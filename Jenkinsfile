@@ -12,9 +12,12 @@ pipeline {
                     // Ajustar as permissões do diretório temporário
                     sh "chmod 777 $gpgTempDir"
 
+                    // Configurar o ambiente do GPG
+                    sh 'export GNUPGHOME=$gpgTempDir'
+
                     // Configurar o repositório Jenkins e baixar a chave
                     sh 'echo deb [signed-by=/usr/share/keyrings/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list'
-                    sh "curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | gpg --dearmor -o $gpgTempDir/jenkins-archive-keyring.gpg"
+                    sh 'curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | gpg --batch --dearmor -o $gpgTempDir/jenkins-archive-keyring.gpg'
 
                     // Ajustar as permissões do diretório GPG
                     sh "chmod -R 600 $gpgTempDir"
