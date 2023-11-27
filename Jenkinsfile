@@ -5,11 +5,11 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Adicionar a chave pública do Jenkins
-                    sh 'wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | gpg --import --no-tty --batch'
-
                     // Configurar o repositório Jenkins
-                    sh 'echo "deb [signed-by=/usr/share/keyrings/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null'
+                    sh 'sudo sh -c "echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list"'
+
+                    // Baixar e adicionar a chave do Jenkins
+                    sh 'sudo apt-key adv --fetch-keys https://pkg.jenkins.io/debian/jenkins.io.key'
 
                     // Atualizar o índice do pacote
                     sh 'sudo -E apt-get update'
