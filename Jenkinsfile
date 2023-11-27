@@ -17,7 +17,12 @@ pipeline {
 
                     // Configurar o repositório Jenkins e baixar a chave
                     sh 'echo deb [signed-by=/usr/share/keyrings/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list'
-                    sh 'curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | gpg --batch --dearmor -o $gpgTempDir/jenkins-archive-keyring.gpg'
+                    
+                    // Mudar para o diretório temporário
+                    sh "cd $gpgTempDir"
+
+                    // Baixar a chave do Jenkins
+                    sh 'curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | gpg --batch --dearmor -o jenkins-archive-keyring.gpg'
 
                     // Ajustar as permissões do diretório GPG
                     sh "chmod -R 600 $gpgTempDir"
@@ -25,6 +30,9 @@ pipeline {
 
                     // Mover a chave para o diretório final
                     sh "sudo mv $gpgTempDir/jenkins-archive-keyring.gpg /usr/share/keyrings/"
+
+                    // Voltar para o diretório de trabalho original
+                    sh "cd -"
 
                     // Atualizar o índice do pacote
                     sh 'sudo -E apt-get update'
