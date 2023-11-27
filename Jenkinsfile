@@ -5,11 +5,9 @@ pipeline{
     stages {
         stage('Build') {
             steps {
-                sh '''
-                 java --version
-                 docker version
-                 docker-compose version   
-                 '''             
+                sh 'java --version'
+                sh 'docker version'
+                sh 'docker-compose version'       
             }
         }
     }
