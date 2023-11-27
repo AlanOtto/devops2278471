@@ -25,8 +25,8 @@ pipeline {
                     sh 'curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | gpg --batch --dearmor -o jenkins-archive-keyring.gpg'
 
                     // Ajustar as permissões do diretório GPG
-                    sh "chmod -R 600 $gpgTempDir"
-                    sh "sudo chown -R jenkins:jenkins $gpgTempDir"
+                    sh "chmod 600 $gpgTempDir/jenkins-archive-keyring.gpg"
+                    sh "sudo chown jenkins:jenkins $gpgTempDir/jenkins-archive-keyring.gpg"
 
                     // Mover a chave para o diretório final
                     sh "sudo mv $gpgTempDir/jenkins-archive-keyring.gpg /usr/share/keyrings/"
