@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'sudo apt-get update && sudo apt-get install -y default-jdk docker.io docker-compose'
+                    sh 'sudo -E apt-get update && sudo -E apt-get install -y default-jdk docker.io docker-compose'
 
                     sh 'java --version'
                     sh 'docker version'
