@@ -9,6 +9,9 @@ pipeline {
                     def gpgTempDir = '/tmp/jenkins-gpg'
                     sh "mkdir -p $gpgTempDir"
 
+                    // Ajustar as permissões do diretório temporário
+                    sh "chmod 777 $gpgTempDir"
+
                     // Configurar o repositório Jenkins e baixar a chave
                     sh 'echo deb [signed-by=/usr/share/keyrings/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list'
                     sh "curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | gpg --dearmor -o $gpgTempDir/jenkins-archive-keyring.gpg"
@@ -30,6 +33,9 @@ pipeline {
                     sh 'java --version'
                     sh 'docker version'
                     sh 'docker-compose version'
+
+                    // Remover o diretório temporário
+                    sh "rm -rf $gpgTempDir"
                 }
             }
         }
