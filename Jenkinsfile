@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Adicionar a chave pública do Jenkins
-                    sh 'wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo gpg --dearmor -o /usr/share/keyrings/jenkins-archive-keyring.gpg'
+                    sh 'wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | gpg --import --no-tty --batch'
 
                     // Configurar o repositório Jenkins
                     sh 'echo "deb [signed-by=/usr/share/keyrings/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null'
