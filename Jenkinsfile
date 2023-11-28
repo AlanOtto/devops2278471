@@ -5,6 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    // Remover a chave GPG existente, se existir
+                    sh 'sudo rm -f /usr/share/keyrings/jenkins-archive-keyring.gpg'
+
                     // Baixar e adicionar a chave GPG do Jenkins
                     sh 'curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | sudo gpg --batch --dearmor -o /usr/share/keyrings/jenkins-archive-keyring.gpg'
 
@@ -26,4 +29,3 @@ pipeline {
         }
     }
 }
-
