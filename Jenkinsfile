@@ -5,6 +5,11 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    // Baixar e adicionar a chave GPG do Jenkins
+                    sh 'curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | sudo gpg --batch --dearmor -o /usr/share/keyrings/jenkins-archive-keyring.gpg'
+
+                    // Configurar o repositório Jenkins
+                    sh 'echo deb [signed-by=/usr/share/keyrings/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list'
 
                     // Atualizar o índice do pacote
                     sh 'sudo -E apt-get update'
@@ -21,3 +26,4 @@ pipeline {
         }
     }
 }
+
