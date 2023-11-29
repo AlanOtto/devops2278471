@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Install Docker') {
+        stage('Install Docker and Jenkins') {
             steps {
                 script {
                     // Instalação do Docker
@@ -15,6 +15,12 @@ pipeline {
 
                     // Adiciona o usuário do Jenkins ao grupo docker para permitir comandos docker sem sudo
                     sh 'sudo usermod -aG docker jenkins'
+
+                    // Instalação do Jenkins e importação da chave GPG
+                    sh 'wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo gpg --dearmor -o /usr/share/keyrings/jenkins-archive-keyring.gpg'
+                    sh 'echo "deb [signed-by=/usr/share/keyrings/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null'
+                    sh 'sudo apt-get update'
+                    sh 'sudo apt-get install -y jenkins'
                 }
             }
         }
