@@ -2,25 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Install Docker') {
             steps {
                 script {
-                    // Baixar e adicionar a chave GPG do Jenkins
-                    sh 'curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | gpg --batch --dearmor -o /tmp/jenkins-archive-keyring.gpg'
+                    // Instalação do Docker
+                    sh 'sudo apt-get update'
+                    sh 'sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common'
+                    sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg'
+                    sh 'echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+                    sh 'sudo apt-get update'
+                    sh 'sudo apt-get install -y docker-ce docker-ce-cli containerd.io'
 
-                    // Configurar o repositório Jenkins
-                    sh 'echo deb [signed-by=/tmp/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list'
-
-                    // Atualizar o índice do pacote
-                    sh 'sudo -E apt-get update'
-
-                    // Instalar dependências
-                    sh 'sudo -E apt-get install -y default-jdk docker.io docker-compose'
-
-                    // Verificar as versões
-                    sh 'java --version'
-                    sh 'docker version'
-                    sh 'docker-compose version'
+                    // Adiciona o usuário do Jenkins ao grupo docker para permitir comandos docker sem sudo
+                    sh 'sudo usermod -aG docker jenkins'
                 }
             }
         }
