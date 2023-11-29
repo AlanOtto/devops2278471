@@ -1,11 +1,5 @@
 pipeline {
     agent any
-
-    triggers {
-        // Configuração de gatilhos
-        scm '*/5 * * * *' // Construir a cada 5 minutos
-    }
-
     stages {
         stage('Clonar Repositório') {
             steps {
