@@ -5,6 +5,8 @@ pipeline {
         stage('Install Docker') {
             steps {
                 script {
+                    sh 'npm install'
+                    sh 'npm test'
                     // Instalação do Docker
                     sh 'sudo apt-get update'
                     sh 'sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common'
