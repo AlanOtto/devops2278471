@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('Clonar Repositório') {
-            steps {
+        //stage('Clonar Repositório') {
+        //    steps {
                 
-                git 'https://github.com/AlanOtto/devops2278471.git'
-            }
-        }
+        //        git 'https://github.com/AlanOtto/devops2278471.git'
+       //     }
+      //  }
     }
     stage ("Create build output"){
     
