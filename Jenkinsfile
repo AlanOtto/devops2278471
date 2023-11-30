@@ -5,14 +5,13 @@ pipeline {
         stage('Check Versions') {
             steps {
                 script {
-                    def javaVersion = sh(script: 'java -version 2>&1 | grep version | awk \'{print $3}\'', returnStatus: true).trim()
+                    sh "java --version"
                     
-                    echo "Java Version: $javaVersion"
+                    echo "java --version"
 
                 }
             }
         }
         
-        // Add more stages as needed for your pipeline
     }
 }
