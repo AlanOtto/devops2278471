@@ -7,7 +7,7 @@ pipeline {
         //        git 'https://github.com/AlanOtto/devops2278471.git'
        //     }
       //  }
-    }
+    
     stage ("Create build output"){
     
     // Make the output directory.
@@ -23,6 +23,7 @@ pipeline {
     
     // Archive the build output artifacts.
     archiveArtifacts artifacts: 'output/*.txt', excludes: 'output/*.md'
+    }
     }
     }
 }
