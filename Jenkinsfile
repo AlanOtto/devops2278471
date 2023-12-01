@@ -1,4 +1,4 @@
-@Library('Artifactory') _
+@Library('Artifactory@3.12.0') _
 import org.jfrog.hudson.pipeline.Artifactory
 
 pipeline {
