@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-    tools {nodejs 'node'}
+    tools {node 'Stages Alan'}
 
     stages {
-        stage('test'){
+        stage('Teste de Ambiente'){
             steps{
                 sh 'npm install'
                 sh 'npm test'
@@ -13,12 +13,13 @@ pipeline {
         stage('build') {
             steps {
                 sh 'docker-compose build' 
+                sh 'docker-compose up' 
             }
         }
-         stage('up') {
-            steps {
-                sh 'docker-compose up'  
-            }
-        }
-}
+        //stage('up') {
+        //    steps {
+        //        sh 'docker-compose up'  
+        //    }
+        //}
+    }
 }
