@@ -1,25 +1,33 @@
 pipeline {
     agent any
-
-    tools {node 'Stages Alan'}
-
-    stages {
-        stage('Teste de Ambiente'){
-            steps{
-                sh 'npm install'
-                sh 'npm test'
-            }
+    stages {        
+    stage('Update Packages') {
+    steps {
+        script {
+            sh 'sudo apt-get update'
         }
-        stage('build') {
+    }
+}
+
+        stage('Install Node.js and npm') {
             steps {
-                sh 'docker-compose build' 
-                sh 'docker-compose up' 
+                script {
+                    // Install Node.js and npm
+                    sh 'apt-get update && apt-get install -y nodejs npm'
+                }
             }
         }
-        //stage('up') {
-        //    steps {
-        //        sh 'docker-compose up'  
-        //    }
-        //}
+
+        stage('Test NodeGoat Repository') {
+            steps {
+                // Add your testing steps for the NodeGoat repositasdasory.
+                // For example, you can clone the repository and run tests.
+                script {
+                    git url: 'https://github.com/AlanOtto/devops2278471.git'
+                    sh 'npm install'
+                    sh 'npm test'
+                }
+            }
+        }
     }
 }
