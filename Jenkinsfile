@@ -1,5 +1,4 @@
-@Library('Artifactory@3.12.0') _
-import org.jfrog.hudson.pipeline.Artifactory
+@Library(['@JFrog_Artifactory']._, 'global') _
 
 pipeline {
     agent any
