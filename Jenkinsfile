@@ -4,7 +4,7 @@ pipeline {
     stage('Update Packages') {
     steps {
         script {
-            sh 'apt-get update'
+            sh 'sudo apt-get update'
         }
     }
 }
