@@ -20,6 +20,13 @@ pipeline {
                 archiveArtifacts artifacts: 'output/*.txt', excludes: 'output/*.md'
             }
         }
+        stage('Update Packages') {
+    steps {
+        script {
+            sh 'sudo apt-get update'
+        }
+    }
+}
 
         stage('Install Node.js and npm') {
             steps {
