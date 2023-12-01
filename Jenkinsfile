@@ -1,3 +1,6 @@
+@Library('Artifactory') _
+import org.jfrog.hudson.pipeline.Artifactory
+
 pipeline {
     agent any
     stages {
