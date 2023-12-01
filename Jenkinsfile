@@ -1,4 +1,4 @@
-@Library(['@JFrog_Artifactory']._, 'global') _
+//@Library(['@JFrog_Artifactory']._, 'global') _
 
 pipeline {
     agent any
@@ -25,30 +25,30 @@ pipeline {
     }
 }
 
-node {
+//node {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
-    def server = Artifactory.server "SERVER_ID"
+   // def server = Artifactory.server "SERVER_ID"
     // Create an Artifactory Maven instance.
-    def rtMaven = Artifactory.newMavenBuild()
-    def buildInfo
+   // def rtMaven = Artifactory.newMavenBuild()
+   // def buildInfo
 
-    stage('Clone sources') {
-        git url: 'https://github.com/AlanOtto/devops2278471.git'
-    }
+   // stage('Clone sources') {
+   //     git url: 'https://github.com/AlanOtto/devops2278471.git'
+   // }
 
-    stage('Artifactory configuration') {
+   // stage('Artifactory configuration') {
         // Tool name from Jenkins configuration
-        rtMaven.tool = "Maven-3.3.9"
+   //     rtMaven.tool = "Maven-3.3.9"
         // Set Artifactory repositories for dependencies resolution and artifacts deployment.
-        rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
-        rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
-    }
+    //    rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
+    //    rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
+   // }
 
-    stage('Maven build') {
-        buildInfo = rtMaven.run pom: 'maven-example/pom.xml', goals: 'clean install'
-    }
+   // stage('Maven build') {
+   //     buildInfo = rtMaven.run pom: 'maven-example/pom.xml', goals: 'clean install'
+   // }
 
-    stage('Publish build info') {
-        server.publishBuildInfo buildInfo
-    }
-}
+   // stage('Publish build info') {
+    //    server.publishBuildInfo buildInfo
+   // }
+//}
