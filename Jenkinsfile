@@ -17,11 +17,12 @@ pipeline {
         stage('Archive build output') {
             steps {
                 // Archive the build output artifacts.
-                archiveArtifacts artifacts: 'output/.txt', excludes: 'output/.md'
+                archiveArtifacts artifacts: 'output/*.txt', excludes: 'output/*.md'
             }
         }
     }
 }
+
 node {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
     def server = Artifactory.server "SERVER_ID"
