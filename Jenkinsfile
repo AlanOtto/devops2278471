@@ -33,5 +33,10 @@ pipeline {
                 sh 'docker-compose up'  
             }
         }
+        stage('Parar o Projeto') {
+            steps {
+                sh 'docker-compose down'
+            }
+        }
     }
 }
