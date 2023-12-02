@@ -5,9 +5,9 @@ pipeline {
             steps {
                 script {
                     sh 'sudo apt-get update'
+                }
+            }
         }
-    }
-}
 
         stage('Install Node.js and npm') {
             steps {
