@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeGoat'
+        nodejs 'node'
     }
     stages {        
         stage('Update Packages') {
