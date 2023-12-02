@@ -10,12 +10,13 @@ pipeline {
                 }
             }
         }
-        stage('Construindo Repository')
+        stage('Construindo Repository') {
             steps {
                 script {
                     sh 'npm install'
                 }
             }
+        }
         stage('Teste Repository') {
             steps {
                 script {
