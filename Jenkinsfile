@@ -1,21 +1,18 @@
 pipeline {
     agent any
-    //tools {
-    //    nodejs 'node'
-    //}
     stages {        
         stage('Update Packages') {
             steps {
                 script {
-                    sh '/usr/bin/apt-get update'
+                    sh 'docker --version'
                 }
             }
         }
         stage('Test NodeGoat Repository') {
             steps {
                 script {
-                    sh '/usr/bin/npm install'
-                    sh '/usr/bin/npm test'
+                    sh 'npm install'
+                    sh 'npm test'
                 }
             }
         }
