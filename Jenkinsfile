@@ -5,6 +5,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker --version'
+                    sh 'npm --version'
                 }
             }
         }
