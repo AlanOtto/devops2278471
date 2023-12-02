@@ -21,7 +21,7 @@ pipeline {
         }
         stage('build Projeto') {
             steps {
-                sh 'docker build' 
+                sh 'docker-compose build' 
             }
         }
         stage('up') {
