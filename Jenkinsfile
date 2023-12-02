@@ -4,7 +4,7 @@ pipeline {
     stage('Update Packages') {
     steps {
         script {
-            sh sh 'sudo -E apt-get update'
+            sh sh 'sudo apt-get update'
         }
     }
 }
@@ -20,8 +20,6 @@ pipeline {
 
         stage('Test NodeGoat Repository') {
             steps {
-                // Add your testing steps for the NodeGoat repositasdasory.
-                // For example, you can clone the repository and run tests.
                 script {
                     git url: 'https://github.com/AlanOtto/devops2278471.git'
                     sh 'npm install'
