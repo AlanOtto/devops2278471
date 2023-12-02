@@ -6,6 +6,8 @@ pipeline {
                 script {
                     sh 'docker --version'
                     sh 'npm --version'
+                    sh 'docker --version'
+                    sh 'docker-compose --version'
                 }
             }
         }
