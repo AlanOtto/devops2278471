@@ -1,30 +1,23 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'NodeGoat'
+    }
     stages {        
         stage('Update Packages') {
             steps {
                 script {
-                    sh 'sudo apt-get update'
+                    sh '/usr/bin/apt-get update'
                 }
             }
         }
-
-        stage('Install Node.js and npm') {
-            steps {
-                script {
-                    // Install Node.js and npm
-                    sh 'apt-get update && apt-get install -y nodejs npm'
-                }
-            }
-        }
-
         stage('Test NodeGoat Repository') {
             steps {
                 script {
-                    sh 'npm install'
-                    sh 'npm test'
+                    sh '/usr/bin/npm install'
+                    sh '/usr/bin/npm test'
                 }
             }
-        }
-    }
+        }
+    }
 }
