@@ -4,17 +4,21 @@ pipeline {
         stage('Conferindo versão de dependencias') {
             steps {
                 script {
-                    sh 'docker --version'
                     sh 'npm --version'
                     sh 'docker --version'
                     sh 'docker-compose --version'
                 }
             }
         }
-        stage('Teste NodeGoat Repository') {
+        stage('Construindo Repository')
             steps {
                 script {
                     sh 'npm install'
+                }
+            }
+        stage('Teste Repository') {
+            steps {
+                script {
                     sh 'npm test'
                 }
             }
